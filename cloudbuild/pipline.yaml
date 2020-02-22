@@ -25,10 +25,10 @@ steps:
     args:
       [
         "run",
-        "-d",
-        "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA",
         "--name",
-        "unittest"
+        "unittest",
+        "-d",
+        "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA"
       ]
   - id: debug
     name: "gcr.io/cloud-builders/docker"
