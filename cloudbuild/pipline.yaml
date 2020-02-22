@@ -32,7 +32,7 @@ steps:
     name: "gcr.io/cloud-builders/docker"
     args:
       [
-        "coutainer",
+        "container",
         "ls"
       ]
   - id: ContainerRegistryへPush
