@@ -25,7 +25,7 @@ steps:
     args:
       [
         "run",
-        "-d"
+        "-d",
         "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA",
       ]
   - id: ContainerRegistryへPush
