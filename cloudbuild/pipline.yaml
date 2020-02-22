@@ -38,7 +38,7 @@ steps:
         "unittest",
         "sh",
         "-c",
-        "pwd && ls -la "
+        "python -m unittest openapi_server.unittest.model.sample.test_sample.TestSample"
       ]
   - id: debug
     name: "gcr.io/cloud-builders/docker"
