@@ -10,4 +10,4 @@ class TestSample(unittest.TestCase):
     #     self.assertFalse(target.function())
 
     def test_test(self):
-        self.assertTrue(True)
+        self.assertFalse(True)
