@@ -1,0 +1,59 @@
+steps:
+  - id: DockerImageビルド
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA",
+        "-t",
+        "gcr.io/$PROJECT_ID/$_REPO_NAME:develop",
+        "-t",
+        "gcr.io/$PROJECT_ID/$_REPO_NAME:staging",
+        "./src/python-flask",
+      ]
+  - id: 単体テスト(未実装)
+    name: "gcr.io/cloud-builders/docker"
+  - id: ContainerRegistryへPush
+    name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA"]
+  - id: CloudRunへデプロイ(dev)
+    name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "beta",
+        "run",
+        "deploy",
+        "$_REPO_NAME-dev",
+        "--image",
+        "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA",
+        "--region",
+        asia-northeast1,
+        "--platform",
+        "managed",
+        "--allow-unauthenticated",
+      ]
+  - id: CloudRunへデプロイ(staging)
+    name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "beta",
+        "run",
+        "deploy",
+        "$_REPO_NAME-staging",
+        "--image",
+        "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA",
+        "--region",
+        asia-northeast1,
+        "--platform",
+        "managed",
+        "--allow-unauthenticated",
+      ]
+  - id: 通しのテスト(未実装)allow
+    name: "gcr.io/cloud-builders/docker"
+images:
+  [
+    "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA",
+    "gcr.io/$PROJECT_ID/$_REPO_NAME:develop",
+    "gcr.io/$PROJECT_ID/$_REPO_NAME:staging",
+  ]
