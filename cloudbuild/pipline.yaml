@@ -38,7 +38,7 @@ steps:
         "unittest",
         "sh",
         "-c",
-        "cd /workspaces/template/src/python-flask && python -m unittest openapi_server.unittest.model.sample.test_sample.TestSample"
+        "pwd && ls -la "
       ]
   - id: debug
     name: "gcr.io/cloud-builders/docker"
