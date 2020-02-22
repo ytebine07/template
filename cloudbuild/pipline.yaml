@@ -5,7 +5,7 @@ steps:
     args:
       [
         "-c",
-        "pip install -r src/python-flask/requirements.txt"
+        "pip install -r src/python-flask/requirements.txt && cd ./src/python-flask/ && python -m unittest openapi_server.unittest.model.sample.test_sample.TestSample"
       ]
   - id: DockerImageビルド
     name: "gcr.io/cloud-builders/docker"
