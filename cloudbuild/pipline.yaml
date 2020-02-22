@@ -20,14 +20,13 @@ steps:
         "gcr.io/$PROJECT_ID/$_REPO_NAME:staging",
         "./src/python-flask",
       ]
-  -id: Run and Unittest
+  - id: Run and Unittest
     name: "gcr.io/cloud-builders/docker"
     args:
       [
         "run",
         "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA",
       ]
-
   - id: ContainerRegistryへPush
     name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA"]
