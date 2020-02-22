@@ -35,7 +35,6 @@ steps:
     args:
       [
         "exec",
-        "-it",
         "unittest",
         "sh",
         "-c",
