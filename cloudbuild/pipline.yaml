@@ -20,7 +20,7 @@ steps:
         "gcr.io/$PROJECT_ID/$_REPO_NAME:staging",
         "./src/python-flask",
       ]
-  - id: Run and Unittest
+  - id: Run for Unittest
     name: "gcr.io/cloud-builders/docker"
     args:
       [
@@ -30,6 +30,18 @@ steps:
         "-d",
         "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA"
       ]
+   - id: Unittest
+    name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "exec",
+        "-it",
+        "unittest",
+        "sh",
+        "-c",
+        "cd /workspaces/template/src/python-flask && python -m unittest openapi_server.unittest.model.sample.test_sample.TestSample"
+      ]
+
   - id: debug
     name: "gcr.io/cloud-builders/docker"
     args:
