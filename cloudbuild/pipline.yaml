@@ -1,4 +1,12 @@
 steps:
+  - id: 単体テスト
+    name: "python:3-alpine"
+    entrypoint: /bin/sh
+    args:
+      [
+        "-c",
+        "pip install -r src/python-flask/requirements.txt"
+      ]
   - id: DockerImageビルド
     name: "gcr.io/cloud-builders/docker"
     args:
@@ -12,15 +20,6 @@ steps:
         "gcr.io/$PROJECT_ID/$_REPO_NAME:staging",
         "./src/python-flask",
       ]
-  - id: 単体テスト
-    name: "gcr.io/cloud-builders/docker"
-    args: [
-            "exec",
-            "-it",
-            "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA",
-            "sh -c",
-            "cd /workspaces/template/src/python-flask && python -m unittest openapi_server.unittest.model.sample.test_sample.Test"
-          ]
   - id: ContainerRegistryへPush
     name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA"]
