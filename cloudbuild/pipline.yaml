@@ -1,12 +1,4 @@
 steps:
-  - id: 単体テスト
-    name: "python:3-alpine"
-    entrypoint: /bin/sh
-    args:
-      [
-        "-c",
-        "pip install -r src/python-flask/requirements.txt && cd ./src/python-flask/ && python -m unittest openapi_server.unittest.model.sample.test_sample.TestSample"
-      ]
   - id: DockerImageビルド
     name: "gcr.io/cloud-builders/docker"
     args:
