@@ -27,7 +27,7 @@ steps:
         "run",
         "-d",
         "gcr.io/$PROJECT_ID/$_REPO_NAME:$SHORT_SHA",
-        "-name",
+        "--name",
         "unittest"
       ]
   - id: debug
